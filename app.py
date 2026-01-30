@@ -82,4 +82,6 @@ if __name__ == '__main__':
     app = create_app()
     print(f"Starting {app.config['APP_NAME']}...")
     print(f"Server running on http://localhost:5000")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    # Only use debug mode in development
+    debug_mode = os.environ.get('FLASK_ENV', 'development') == 'development'
+    app.run(host='0.0.0.0', port=5000, debug=debug_mode)
