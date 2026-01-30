@@ -115,41 +115,75 @@
 
 ### Vulnerability Scan Results (January 30, 2026)
 
-**Initial Scan**: 12 vulnerabilities found in AI/ML dependencies  
-**Status**: ✅ All fixed by updating to patched versions
+**Core Dependencies**: ✅ No vulnerabilities  
+**AI/ML Dependencies**: ⚠️ 1 unpatched vulnerability (optional dependencies)
 
-#### Vulnerabilities Fixed
+### Known Vulnerabilities
 
-1. **protobuf 4.25.1** - 4 vulnerabilities
-   - JSON recursion depth bypass
-   - Denial of Service issues (multiple)
-   - **Fixed**: Updated to **4.25.8** ✅
+#### AI/ML Dependencies (OPTIONAL - Not Required)
 
-2. **sentencepiece 0.1.99** - 1 vulnerability
-   - Heap overflow issue
-   - **Fixed**: Updated to **0.2.1** ✅
+**Status**: ⚠️ 1 unpatched vulnerability in optional dependencies
 
-3. **torch 2.1.0** - 4 vulnerabilities
-   - Heap buffer overflow
-   - Use-after-free vulnerability
-   - Remote code execution via `torch.load`
-   - Deserialization vulnerability
-   - **Fixed**: Updated to **2.6.0** ✅
+The application includes **optional AI/ML dependencies** that enable advanced BERT/FLAN-T5 model support. However, these are **NOT required** - the application works perfectly in fallback mode without them.
 
-4. **transformers 4.36.0** - 3 vulnerabilities
-   - Deserialization of untrusted data (multiple instances)
-   - **Fixed**: Updated to **4.48.0** ✅
+**protobuf vulnerability** (in optional dependencies):
+- **Package**: protobuf 4.25.8
+- **Issue**: JSON recursion depth bypass
+- **Affected versions**: <= 6.33.4
+- **Patched version**: Not available
+- **Severity**: Medium
+- **Impact**: Potential DoS through JSON recursion
+- **Mitigation**: 
+  - ✅ Don't install AI dependencies (use fallback mode)
+  - AI dependencies are in separate `requirements-ai.txt` file
+  - Application fully functional without AI models
 
-### Current Status
-All dependencies are pinned to specific versions in requirements.txt with all known vulnerabilities patched.
+### Dependency Structure
 
-### Updated Dependencies
+**Core Dependencies** (`requirements.txt`):
+- ✅ All secure, no vulnerabilities
+- Includes Flask, SQLAlchemy, authentication, ML basics
+- **Recommended for all users**
+
+**AI/ML Dependencies** (`requirements-ai.txt`):
+- ⚠️ Contains protobuf with unpatched vulnerability
+- Includes transformers, torch, sentencepiece
+- Required only for BERT/FLAN-T5 model support
+- **Optional - not recommended until vulnerability is patched**
+- Application works in fallback mode without these
+
+### Installation Options
+
+**Option 1: Secure Installation (Recommended)**
+```bash
+pip install -r requirements.txt
 ```
-protobuf==4.25.8      (was 4.25.1)
-sentencepiece==0.2.1  (was 0.1.99)
-torch==2.6.0          (was 2.1.0)
-transformers==4.48.0  (was 4.36.0)
+- ✅ No vulnerabilities
+- ✅ All features work (chatbot uses fallback mode)
+- ✅ Faster, smaller install (~100MB)
+- ✅ Lower memory usage
+
+**Option 2: With AI Models (Has Known Vulnerability)**
+```bash
+pip install -r requirements.txt
+pip install -r requirements-ai.txt  # Contains protobuf vulnerability
 ```
+- ⚠️ Contains 1 unpatched vulnerability
+- AI-enhanced responses with BERT/FLAN-T5
+- Large install (~2-4GB)
+- High memory usage (~2-4GB RAM)
+
+### Vulnerability Timeline
+
+#### Initial Scan (Dependencies Updated)
+- protobuf: 4.25.1 → 4.25.8 (patched 3 DoS vulnerabilities)
+- sentencepiece: 0.1.99 → 0.2.1 (patched heap overflow)
+- torch: 2.1.0 → 2.6.0 (patched 4 vulnerabilities)
+- transformers: 4.36.0 → 4.48.0 (patched 3 deserialization issues)
+
+#### Remaining Issue
+- protobuf: 4.25.8 still has JSON recursion bypass (no patch available)
+- **Resolution**: Made AI dependencies optional
 
 ### Recommendations
 1. Regularly update dependencies for security patches

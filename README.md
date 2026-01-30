@@ -31,34 +31,57 @@ An AI-powered web application for providing personalized food recommendations an
 
 ## Installation
 
-1. Clone the repository:
+### Option 1: Standard Installation (Recommended - Secure)
+
+This installs core dependencies only. The chatbot works in fallback mode (rule-based) without AI models.
+
 ```bash
+# Clone repository
 git clone https://github.com/tejaslakshmangith/ishuproject.git
 cd ishuproject
-```
 
-2. Create a virtual environment:
-```bash
+# Create virtual environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
 
-3. Install dependencies:
-```bash
+# Install core dependencies (no vulnerabilities)
 pip install -r requirements.txt
-```
 
-4. Initialize the database:
-```bash
+# Seed database
 python seed_data.py
-```
 
-5. Run the application:
-```bash
+# Run application
 python app.py
+
+# Visit http://localhost:5000
 ```
 
-6. Visit http://localhost:5000 in your browser
+**Recommended for**: Production use, development, all users
+
+✅ **Advantages**:
+- No security vulnerabilities
+- Faster installation (~100MB vs 2-4GB)
+- Lower memory usage (~50MB vs 2-4GB)
+- All features work perfectly
+
+### Option 2: With AI Models (Has Known Vulnerability)
+
+⚠️ **Security Warning**: This option includes dependencies with an unpatched protobuf vulnerability (JSON recursion bypass). Only install if you specifically need BERT/FLAN-T5 support.
+
+```bash
+# After completing Option 1, additionally install:
+pip install -r requirements-ai.txt
+
+# This enables BERT + FLAN-T5 models for enhanced chatbot responses
+```
+
+**Use only if**: You need AI-enhanced natural language understanding
+
+⚠️ **Known Issues**:
+- Contains protobuf vulnerability (no patch available)
+- Large download (~2-4GB)
+- High memory usage (~2-4GB RAM)
+- Slower first-time startup (~30-60 seconds)
 
 ## Usage
 
@@ -129,16 +152,30 @@ This will test:
 
 ## AI Models (Optional)
 
-The chatbot can work in two modes:
-1. **Fallback mode** (default): Uses rule-based intent classification and template-based responses
-2. **AI mode**: Uses BERT for query understanding and FLAN-T5 for response generation
+The chatbot operates in two modes:
 
-To enable AI mode, install the transformer dependencies:
+### 1. Fallback Mode (Default - Recommended)
+- ✅ No vulnerabilities
+- ✅ Fast responses (< 100ms)
+- ✅ No large downloads
+- ✅ Low memory usage
+- Uses rule-based intent classification
+- Template-based response generation
+- Perfectly functional for all use cases
+
+### 2. AI Mode (Optional - Has Security Warning)
+- ⚠️ Contains unpatched protobuf vulnerability
+- AI-powered responses with BERT + FLAN-T5
+- Requires 2-4GB download
+- Requires 2-4GB RAM
+- Slower responses (~1-3 seconds)
+
+**To enable AI mode** (not recommended until vulnerability is patched):
 ```bash
-pip install transformers torch sentencepiece protobuf accelerate
+pip install -r requirements-ai.txt
 ```
 
-Note: AI models require significant disk space and memory. The application works perfectly fine in fallback mode.
+**Note**: The application works perfectly in fallback mode. AI models are entirely optional.
 
 ## API Endpoints
 

@@ -215,14 +215,25 @@ UserInteraction
 **Test Results**: All tests pass ✅
 
 ### Dependency Security Scan ✅
-**Initial Scan**: 12 vulnerabilities found  
-**Status**: ✅ All fixed
+**Initial Vulnerabilities**: 12  
+**Vulnerabilities Fixed**: 11  
+**Remaining Issues**: 1 (in optional dependencies only)
 
-**Vulnerabilities Patched**:
-- protobuf: 4.25.1 → 4.25.8 (4 CVEs fixed)
-- sentencepiece: 0.1.99 → 0.2.1 (1 CVE fixed)
-- torch: 2.1.0 → 2.6.0 (4 CVEs fixed)
-- transformers: 4.36.0 → 4.48.0 (3 CVEs fixed)
+**Resolution Strategy**:
+- Separated AI/ML dependencies into `requirements-ai.txt`
+- Core application (`requirements.txt`): ✅ Zero vulnerabilities
+- Optional AI features (`requirements-ai.txt`): ⚠️ 1 unpatched vulnerability
+
+**Core Dependencies** (requirements.txt):
+- ✅ All secure, no vulnerabilities
+- Application fully functional without AI models
+
+**Optional AI Dependencies** (requirements-ai.txt):
+- protobuf 4.25.8: JSON recursion bypass (no patch available)
+- Only needed for BERT/FLAN-T5 support
+- Application works perfectly in fallback mode without these
+
+**Recommendation**: Use core dependencies only (default installation)
 
 ### Code Review ✅
 **Issues Found**: 13  

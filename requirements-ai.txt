@@ -1,0 +1,17 @@
+# Optional AI/ML Dependencies for Enhanced Chatbot Features
+# 
+# SECURITY WARNING: These dependencies have known vulnerabilities with no patches available:
+# - protobuf: JSON recursion depth bypass (CVE affects versions <= 6.33.4, no patch available)
+#
+# The application works perfectly WITHOUT these dependencies using fallback mode.
+# Only install if you specifically need BERT/FLAN-T5 AI model support.
+#
+# Install with: pip install -r requirements-ai.txt
+#
+# Note: These packages are large (~2-4GB) and require significant memory.
+
+transformers==4.48.0
+torch==2.6.0
+sentencepiece==0.2.1
+protobuf==4.25.8
+accelerate==0.25.0
