@@ -90,7 +90,7 @@
                 </div>
                 <div class="card-body">
                     <p><strong>Trimester:</strong> {{ current_user.current_trimester }}</p>
-                    <p><strong>Dietary Preference:</strong> {{ current_user.dietary_preferences }}</p>
+                    <p><strong>Dietary Preference:</strong> {{ current_user.dietary_preferences|default('vegetarian')|title }}</p>
                     <p class="mb-0"><small class="text-muted">Meal plans are customized for your trimester</small></p>
                 </div>
             </div>

@@ -144,14 +144,14 @@ Note: AI models require significant disk space and memory. The application works
 
 ### Chatbot
 - `GET /chatbot` - Chatbot interface
-- `POST /api/chatbot/ask` - Ask a question
-- `GET /api/chatbot/suggestions` - Get suggested questions
-- `GET /api/chatbot/history` - Get chat history
+- `POST /chatbot/api/ask` - Ask a question
+- `GET /chatbot/api/suggestions` - Get suggested questions
+- `GET /chatbot/api/history` - Get chat history
 
 ### Meal Plans
 - `GET /meal-plans` - Meal plan generator interface
-- `POST /api/meal-plans/generate` - Generate meal plan
-- `GET /api/meal-plans/preferences` - Get available preferences
+- `POST /meal-plans/api/generate` - Generate meal plan
+- `GET /meal-plans/api/preferences` - Get available preferences
 
 ### Authentication
 - `GET /auth/register` - Registration page

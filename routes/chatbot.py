@@ -75,8 +75,7 @@ def ask_question():
         # Log interaction to database
         interaction = UserInteraction(
             user_id=current_user.id,
-            interaction_type='chatbot_query',
-            details=question
+            interaction_type='chatbot_query'
         )
         interaction.set_details({
             'question': question,
@@ -100,8 +99,7 @@ def ask_question():
     except Exception as e:
         print(f"Error in chatbot ask: {e}")
         return jsonify({
-            'error': 'An error occurred processing your question. Please try again.',
-            'details': str(e)
+            'error': 'An error occurred processing your question. Please try again.'
         }), 500
 
 

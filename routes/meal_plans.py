@@ -105,8 +105,7 @@ def generate_meal_plan():
         traceback.print_exc()
         return jsonify({
             'success': False,
-            'error': 'An error occurred generating the meal plan. Please try again.',
-            'details': str(e)
+            'error': 'An error occurred generating the meal plan. Please try again.'
         }), 500
 
 
@@ -139,10 +138,11 @@ def get_preferences():
         
     except Exception as e:
         print(f"Error getting preferences: {e}")
+        # Return 500 with defaults as fallback
         return jsonify({
             'success': False,
-            'error': 'Could not load preferences',
+            'error': 'Could not load preferences, showing defaults',
             'regions': ['All India', 'North Indian', 'South Indian'],
             'diet_types': ['vegetarian', 'non-vegetarian', 'vegan'],
             'days_range': {'min': 1, 'max': 30}
-        }), 200  # Return defaults even on error
+        }), 500
