@@ -113,8 +113,43 @@
 
 ## Dependencies Security
 
+### Vulnerability Scan Results (January 30, 2026)
+
+**Initial Scan**: 12 vulnerabilities found in AI/ML dependencies  
+**Status**: ✅ All fixed by updating to patched versions
+
+#### Vulnerabilities Fixed
+
+1. **protobuf 4.25.1** - 4 vulnerabilities
+   - JSON recursion depth bypass
+   - Denial of Service issues (multiple)
+   - **Fixed**: Updated to **4.25.8** ✅
+
+2. **sentencepiece 0.1.99** - 1 vulnerability
+   - Heap overflow issue
+   - **Fixed**: Updated to **0.2.1** ✅
+
+3. **torch 2.1.0** - 4 vulnerabilities
+   - Heap buffer overflow
+   - Use-after-free vulnerability
+   - Remote code execution via `torch.load`
+   - Deserialization vulnerability
+   - **Fixed**: Updated to **2.6.0** ✅
+
+4. **transformers 4.36.0** - 3 vulnerabilities
+   - Deserialization of untrusted data (multiple instances)
+   - **Fixed**: Updated to **4.48.0** ✅
+
 ### Current Status
-All dependencies are pinned to specific versions in requirements.txt
+All dependencies are pinned to specific versions in requirements.txt with all known vulnerabilities patched.
+
+### Updated Dependencies
+```
+protobuf==4.25.8      (was 4.25.1)
+sentencepiece==0.2.1  (was 0.1.99)
+torch==2.6.0          (was 2.1.0)
+transformers==4.48.0  (was 4.36.0)
+```
 
 ### Recommendations
 1. Regularly update dependencies for security patches
