@@ -146,11 +146,13 @@ The application includes **optional AI/ML dependencies** that enable advanced BE
 - **Recommended for all users**
 
 **AI/ML Dependencies** (`requirements-ai.txt`):
-- ⚠️ Contains protobuf with unpatched vulnerability
+- ⚠️ Has transitive dependency with unpatched vulnerability (protobuf)
 - Includes transformers, torch, sentencepiece
 - Required only for BERT/FLAN-T5 model support
 - **Optional - not recommended until vulnerability is patched**
 - Application works in fallback mode without these
+
+**Note**: protobuf is not explicitly listed but will be installed as a transitive dependency of transformers/torch. It contains an unpatched JSON recursion depth bypass vulnerability.
 
 ### Installation Options
 
